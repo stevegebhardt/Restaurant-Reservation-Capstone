@@ -29,7 +29,7 @@ const Table = ({ table, loadDashboard }) => {
                   data-table-id-status={table.table_id}
                   style={{ cursor: "default" }}
                 >
-                  occupied
+                  Occupied
                 </div>
               </>
             ) : (

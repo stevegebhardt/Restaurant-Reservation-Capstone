@@ -3,6 +3,7 @@ import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import Reservation from "../dashboard/Reservation";
 import Table from "../dashboard/Table";
+import DateNavigation from "./DateNavigation";
 
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
@@ -39,7 +40,7 @@ function Dashboard({ date }) {
   );
 
   const tableList = tables.map((table) => (
-    <Table key={table.table_id} table={table} />
+    <Table key={table.table_id} table={table} loadDashboard={loadDashboard} />
   ));
 
   const tableContent = tables.length ? (
@@ -53,16 +54,17 @@ function Dashboard({ date }) {
 
   return (
     <main>
-      <h1>Dashboard</h1>
       <div>
-        <h4>Reservations for date</h4>
+        <h1>Dashboard</h1>
+        <DateNavigation date={date} />
       </div>
-      <div>
-        {reservationContent}
-        {tableContent}
-      </div>
-
       <ErrorAlert error={reservationsError} />
+      <ErrorAlert error={tablesError} />
+      <div>
+        <h4>Reservations for {date}</h4>
+        {reservationContent}
+      </div>
+      <div>{tableContent}</div>
     </main>
   );
 }
