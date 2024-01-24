@@ -29,7 +29,7 @@ async function validateProperties(req, res, next) {
     // validating the reservation time format
     if (!validateTime(reservation_time)) {
       const error = new Error(
-        `"${reservation_time}" reservation_time is invalid. Please use this format: HH:MM:SS`
+        `"${reservation_time}" reservation_time is invalid. Please use this format: HH:MM`
       );
       error.status = 400;
       throw error;
@@ -71,7 +71,7 @@ function validateDate(date) {
 }
 
 function validateTime(time) {
-  let time_regex = /^(2[0-3]|[01][0-9]):[0-5][0-9]$/;
+  let time_regex = /^(?:[01]?\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/;
   return time_regex.test(time);
 }
 

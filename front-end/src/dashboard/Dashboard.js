@@ -26,7 +26,11 @@ function Dashboard({ date }) {
   }
 
   const reservationList = reservations.map((reservation) => (
-    <Reservation key={reservation.reservation_id} reservation={reservation} />
+    <Reservation
+      key={reservation.reservation_id}
+      reservation={reservation}
+      loadDashboard={loadDashboard}
+    />
   ));
 
   const reservationContent = reservations.length ? (
