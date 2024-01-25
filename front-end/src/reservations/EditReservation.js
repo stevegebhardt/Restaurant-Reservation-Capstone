@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { readReservation, updateReservation } from "../utils/api";
 import formatReservationDate from "../utils/format-reservation-date";
 import addDashes from "../utils/addDashes";
-import NewReservationForm from "./NewReservationForm";
+import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
 
 export default function EditReservation() {
@@ -42,10 +42,14 @@ export default function EditReservation() {
 
   const handleChange = ({ target }) => {
     if (target.name === "mobile_number") addDashes(target);
-    setFormData({
-      ...formData,
-      [target.name]: target.value,
-    });
+    if (target.type === "number") {
+      setFormData({ ...formData, [target.name]: Number(target.value) });
+    } else {
+      setFormData({
+        ...formData,
+        [target.name]: target.value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -106,13 +110,13 @@ export default function EditReservation() {
 
     setFormErrors(errors);
 
+    // update the existing reservation if no errors are present
     !errors.length &&
-      updateReservation(formData, abortController.signal)
+      updateReservation(formData, reservation_id, abortController.signal)
         .then((_) => {
-          //redirect to the dashboard with date of reservation newly created
           history.push(`/dashboard?date=${formData.reservation_date}`);
         })
-        .catch((error) => console.log(error));
+        .catch((e) => console.log(e));
 
     return () => abortController.abort();
   };
@@ -127,7 +131,7 @@ export default function EditReservation() {
         <h1>Edit Reservation</h1>
       </div>
       {displayErrors}
-      <NewReservationForm
+      <ReservationForm
         formData={formData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}

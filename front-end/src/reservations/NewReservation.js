@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import addDashes from "../utils/addDashes";
 import ErrorAlert from "../layout/ErrorAlert";
-import ReservationForm from "./NewReservationForm";
+import ReservationForm from "./ReservationForm";
 import { createReservation } from "../utils/api";
 
 export default function NewReservation() {
