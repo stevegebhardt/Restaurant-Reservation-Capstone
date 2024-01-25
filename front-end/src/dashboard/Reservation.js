@@ -13,7 +13,7 @@ export default function Reservation({ reservation, loadDashboard }) {
   } = reservation;
 
   function handleClick() {
-    if (window.confirm("Would you like to cancel this reservation?")) {
+    if (window.confirm("Do you want to cancel this reservation?")) {
       const abortController = new AbortController();
 
       cancelReservation(reservation_id, abortController.signal)

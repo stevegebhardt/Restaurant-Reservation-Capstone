@@ -50,13 +50,13 @@ async function validateProperties(req, res, next) {
     }
 
     // validating the reservation status is booked
-    // if (status !== "booked") {
-    //   const error = new Error(
-    //     `Reservation status nmust be "booked" not ${status}`
-    //   );
-    //   error.status = 400;
-    //   throw error;
-    // }
+    if (status === "seated" || status === "finished") {
+      const error = new Error(
+        `Reservation status must be "booked" not ${status}`
+      );
+      error.status = 400;
+      throw error;
+    }
 
     next();
   } catch (error) {

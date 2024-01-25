@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { readReservation, updateReservation } from "../utils/api";
 import formatReservationDate from "../utils/format-reservation-date";
 import addDashes from "../utils/addDashes";
-import NewReservationForm from "./NewReservationForm";
+import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
 
 export default function EditReservation() {
@@ -110,6 +110,7 @@ export default function EditReservation() {
 
     setFormErrors(errors);
 
+    // update the existing reservation if no errors are present
     !errors.length &&
       updateReservation(formData, reservation_id, abortController.signal)
         .then((_) => {
@@ -130,7 +131,7 @@ export default function EditReservation() {
         <h1>Edit Reservation</h1>
       </div>
       {displayErrors}
-      <NewReservationForm
+      <ReservationForm
         formData={formData}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
