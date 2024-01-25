@@ -57,6 +57,13 @@ export default function NewReservation() {
       });
     }
 
+    // validate telephone number
+    if (formData.mobile_number.length < 10) {
+      errors.push({
+        message: "Telephone number must be 10 digits",
+      });
+    }
+
     // validate reservation date is not in the past
     if (Date.parse(reservationDate) < Date.now()) {
       errors.push({
