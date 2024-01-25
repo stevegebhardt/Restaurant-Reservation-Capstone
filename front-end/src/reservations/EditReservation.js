@@ -101,6 +101,13 @@ export default function EditReservation() {
       });
     }
 
+    // validate telephone number
+    if (formData.mobile_number.length < 10) {
+      errors.push({
+        message: "Telephone number must be 10 digits",
+      });
+    }
+
     // validate party size selection
     if (formData.people < 1) {
       errors.push({
