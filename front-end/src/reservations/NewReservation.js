@@ -29,6 +29,7 @@ export default function NewReservation() {
       [target.name]:
         target.name === "people" ? parseInt(target.value) : target.value,
     });
+    console.log("newressyFormData", formData);
   };
 
   const handleSubmit = (e) => {
@@ -39,7 +40,7 @@ export default function NewReservation() {
     setFormErrors([]);
 
     const reservationDate = new Date(
-      `${formData.reservation_date}T${formData.reservation_time}:00`
+      `${formData.reservation_date} ${formData.reservation_time}`
     );
 
     const [hours, minutes] = formData.reservation_time.split(":");

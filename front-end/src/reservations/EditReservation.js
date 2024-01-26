@@ -58,9 +58,8 @@ export default function EditReservation() {
     const abortController = new AbortController();
 
     setFormErrors([]);
-
     const reservationDate = new Date(
-      `${formData.reservation_date}T${formData.reservation_time}:00`
+      `${formData.reservation_date} ${formData.reservation_time}`
     );
 
     const [hours, minutes] = formData.reservation_time.split(":");
@@ -131,6 +130,8 @@ export default function EditReservation() {
   let displayErrors = formErrors.map((error, index) => (
     <ErrorAlert key={index} error={error} />
   ));
+
+  console.log("formData", formData);
 
   return (
     <>
